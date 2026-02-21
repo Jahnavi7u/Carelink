@@ -1,0 +1,13 @@
+.btn-primary {
+  width: 100%;
+  background-color: #4f39f6; /* Tailwind's bg-blue-500 */
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+  cursor: pointer;
+  background-color: #3f31aa; /* Tailwind's bg-blue-600 */
+}

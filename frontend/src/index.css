@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+.input-field {
+  @apply w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition;
+}
+
+.toggle-section {
+  @apply bg-gray-50 p-4 rounded-lg border border-gray-200;
+}
+
+.toggle-label {
+  @apply flex items-center gap-2 font-medium text-gray-700;
+}
+
+.toggle-checkbox {
+  @apply w-5 h-5 text-indigo-600 focus:ring-indigo-500;
+}
+
+.radio-label {
+  @apply flex items-center gap-2 bg-gray-100 px-4 py-2 rounded-lg border border-gray-300 hover:bg-indigo-50 cursor-pointer;
+}
+
+.radio-input {
+  @apply w-5 h-5 text-indigo-600 focus:ring-indigo-500;
+}
