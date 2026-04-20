@@ -24,6 +24,12 @@ const Contact = lazy(() => import("../pages/static/contact"));
 const Terms = lazy(() => import("../pages/static/terms"));
 const Consent = lazy(() => import("../pages/static/consent"));
 const Cookies = lazy(() => import("../pages/static/cookies"));
+const EditProfile = lazy(() => import("../pages/user/EditProfile"));
+const SymptomChecker = lazy(() => import("../pages/user/SymptomChecker"));
+const VideoCall = lazy(() => import("../pages/VideoCall"));
+const WritePrescription = lazy(() => import("../pages/doctor/WritePrescription"));
+const PatientHistory = lazy(() => import("../pages/doctor/PatientHistory"));
+const EditDoctorProfile = lazy(() => import("../pages/doctor/EditDoctorProfile"));
 const AppRoutes = () => {
     return (
         <Router>
@@ -165,6 +171,46 @@ const AppRoutes = () => {
                     <Route path="/admin-page" element={<ProtectedRoute>
                         <Navbar />
                         <Admin />
+                        <Footer />
+                    </ProtectedRoute>} />
+
+                    <Route path="/edit-profile" element={<ProtectedRoute>
+                        <Navbar />
+                        <DockComponent />
+                        <EditProfile />
+                        <Footer />
+                    </ProtectedRoute>} />
+
+                    <Route path="/symptom-checker" element={<ProtectedRoute>
+                        <Navbar />
+                        <DockComponent />
+                        <ChatBotBtn />
+                        <SymptomChecker />
+                        <Footer />
+                    </ProtectedRoute>} />
+
+                    <Route path="/video-call" element={<ProtectedRoute>
+                        <VideoCall />
+                    </ProtectedRoute>} />
+
+                    <Route path="/write-prescription/:appointmentId/:patientId/:patientName" element={<ProtectedRoute>
+                        <Navbar />
+                        <DockComponent />
+                        <WritePrescription />
+                        <Footer />
+                    </ProtectedRoute>} />
+
+                    <Route path="/patient-history/:patientId" element={<ProtectedRoute>
+                        <Navbar />
+                        <DockComponent />
+                        <PatientHistory />
+                        <Footer />
+                    </ProtectedRoute>} />
+
+                    <Route path="/edit-doctor-profile" element={<ProtectedRoute>
+                        <Navbar />
+                        <DockComponent />
+                        <EditDoctorProfile />
                         <Footer />
                     </ProtectedRoute>} />
                 </Routes>

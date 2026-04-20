@@ -4,7 +4,7 @@ const userModel = require("../database/models/userModel");
 
 const registerController = async (req, res) => {
   try {
-    const existingUser = userModel.findOne({ email: req.body.email });
+    const existingUser = await userModel.findOne({ email: req.body.email });
     if (existingUser) {
       return res.status(200).send({
         success: false,
@@ -15,7 +15,7 @@ const registerController = async (req, res) => {
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
     req.body.password = hashedPassword;
 
-    const user = userModel.create(req.body);
+    const user = await userModel.create(req.body);
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
       expiresIn: "1d",
     });

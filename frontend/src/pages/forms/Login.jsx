@@ -188,7 +188,6 @@ const Login = () => {
                         <button
                             className="btn-primary w-full"
                             type="submit"
-                            disabled={!isVerified}
                         >
                             Log in
                         </button>

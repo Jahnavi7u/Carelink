@@ -7,6 +7,11 @@ const VALID_COLUMNS = [
   "clinicname", "clinicloc", "availability", "fee", "language",
 ];
 
+// Map frontend field names to DB column names
+const FIELD_ALIASES = {
+  specialization: "specilization",
+};
+
 function transformRow(row) {
   if (!row) return null;
   const result = { ...row, _id: row.id };
@@ -15,17 +20,36 @@ function transformRow(row) {
       try { result[f] = JSON.parse(result[f]); } catch { result[f] = []; }
     }
   });
+  // Expose specilization as specialization for frontend compatibility
+  if (result.specilization !== undefined) {
+    result.specialization = result.specilization;
+  }
   return result;
 }
 
+
 function prepareData(data) {
+  // Remap aliased field names (e.g. specialization -> specilization)
+  const mapped = { ...data };
+  Object.entries(FIELD_ALIASES).forEach(([alias, dbCol]) => {
+    if (mapped[alias] !== undefined && mapped[dbCol] === undefined) {
+      mapped[dbCol] = mapped[alias];
+      delete mapped[alias];
+    }
+  });
+
   const prepared = {};
   VALID_COLUMNS.forEach((col) => {
-    if (data[col] !== undefined) {
+    if (mapped[col] !== undefined) {
       if (JSON_FIELDS.includes(col)) {
-        prepared[col] = JSON.stringify(data[col] || []);
+        let value = mapped[col];
+        // Convert comma-separated strings to arrays
+        if (typeof value === "string") {
+          value = value.split(",").map((s) => s.trim()).filter(Boolean);
+        }
+        prepared[col] = JSON.stringify(value || []);
       } else {
-        prepared[col] = data[col];
+        prepared[col] = mapped[col];
       }
     }
   });

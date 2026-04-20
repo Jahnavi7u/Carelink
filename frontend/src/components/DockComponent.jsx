@@ -3,7 +3,7 @@ import Dock from "./Dock";
 import { VscHome, VscArchive, VscAccount, VscSettingsGear } from "react-icons/vsc";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
-import { ClipboardList, Stethoscope, Calendar } from "lucide-react";
+import { ClipboardList, Stethoscope, Calendar, HeartPulse, Settings, Video } from "lucide-react";
 
 const DockComponent = () => {
     const navigate = useNavigate();
@@ -14,22 +14,27 @@ const DockComponent = () => {
         if (user) {
             setRole(user.role);
         } else {
-            setRole(null); // Ensure role is cleared on logout
+            setRole(null);
         }
     }, [user]);
 
-    if (loading) return null; // Prevent rendering while loading
+    if (loading) return null;
 
     const userItems = [
         { icon: <VscHome size={18} className="text-white" />, label: "Home", onClick: () => navigate("/home") },
-        { icon: <ClipboardList size={18} className="text-white" />, label: "Medical Records", onClick: () => navigate("/medical-records") },
+        { icon: <HeartPulse size={18} className="text-white" />, label: "Symptom Checker", onClick: () => navigate("/symptom-checker") },
         { icon: <Stethoscope size={18} className="text-white" />, label: "Doctors List", onClick: () => navigate("/doctorlist") },
         { icon: <Calendar size={18} className="text-white" />, label: "Appointments", onClick: () => navigate("/appointment-user") },
+        { icon: <Video size={18} className="text-white" />, label: "Video Call", onClick: () => navigate("/video-call") },
+        { icon: <ClipboardList size={18} className="text-white" />, label: "Medical Records", onClick: () => navigate("/medical-records") },
+        { icon: <Settings size={18} className="text-white" />, label: "Edit Profile", onClick: () => navigate("/edit-profile") },
     ];
 
     const doctorItems = [
         { icon: <VscHome size={18} className="text-white" />, label: "Home", onClick: () => navigate("/home") },
         { icon: <Calendar size={18} className="text-white" />, label: "Appointments", onClick: () => navigate("/appointment-doc") },
+        { icon: <Video size={18} className="text-white" />, label: "Video Call", onClick: () => navigate("/video-call") },
+        { icon: <Settings size={18} className="text-white" />, label: "Edit Profile", onClick: () => navigate("/edit-doctor-profile") },
     ];
 
     return (

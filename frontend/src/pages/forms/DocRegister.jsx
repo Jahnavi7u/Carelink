@@ -166,12 +166,22 @@ const Register = () => {
 
                             {/* Specialization */}
                             <div>
-                                <input
-                                    type="text"
+                                <select
                                     {...register("specialization", { required: "Specialization is required" })}
-                                    placeholder="Specialization"
                                     className="input-field"
-                                />
+                                >
+                                    <option value="">Select Specialization</option>
+                                    <option value="Cardiology">Cardiology</option>
+                                    <option value="Neurology">Neurology</option>
+                                    <option value="Orthopedics">Orthopedics</option>
+                                    <option value="Dermatology">Dermatology</option>
+                                    <option value="Pediatrics">Pediatrics</option>
+                                    <option value="Psychiatry">Psychiatry</option>
+                                    <option value="Ophthalmology">Ophthalmology</option>
+                                    <option value="Gynecology">Gynecology</option>
+                                    <option value="General Medicine">General Medicine</option>
+                                    <option value="ENT">ENT (Ear, Nose & Throat)</option>
+                                </select>
                             </div>
 
                             {/* Year Of Experience */}

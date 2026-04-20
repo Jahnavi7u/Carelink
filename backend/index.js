@@ -15,6 +15,14 @@ app.use(bodyParser.json());
 // Initialize SQLite database
 initDB();
 
+// Initialize reviews table
+const reviewModel = require("./database/models/reviewModel");
+reviewModel.createTable();
+
+// Initialize prescriptions table
+const prescriptionModel = require("./database/models/prescriptionModel");
+prescriptionModel.createTable();
+
 app.use("/v1", require("./router/authRouter"));
 app.use("/v1", require("./router/doctorRegRouter"));
 app.use("/v1", require("./router/loginRouter"));
@@ -27,6 +35,12 @@ app.use("/v1", require("./router/getAppointmentRouter"));
 app.use("/v1", require("./router/prescRouter"));
 app.use("/v1", require("./router/mapRouter"));
 app.use("/v1", require("./router/otpRouter"));
+app.use("/v1", require("./router/updateProfileRouter"));
+app.use("/v1", require("./router/reviewRouter"));
+app.use("/v1", require("./router/symptomCheckerRouter"));
+app.use("/v1", require("./router/doctorStatsRouter"));
+app.use("/v1", require("./router/prescriptionRouter"));
+app.use("/v1", require("./router/patientHistoryRouter"));
 
 app.get("/", (req, res) => {
   res.send("CareLink API is running!");

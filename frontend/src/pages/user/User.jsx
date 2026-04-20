@@ -1,9 +1,11 @@
 import React from "react";
 import useFetch from "../../hooks/useFetch";
 import { motion } from "framer-motion";
-
+import { useNavigate } from "react-router-dom";
+import { Pencil } from "lucide-react";
 const User = () => {
     const { data: user, loading, error } = useFetch("http://localhost:8080/v1/current-user");
+    const navigate = useNavigate();
 
     if (loading) return <p className="text-center text-xl text-indigo-600">Loading...</p>;
     if (error) return <p className="text-center text-xl text-red-500">Error fetching user data</p>;
@@ -24,7 +26,16 @@ const User = () => {
                     <img src="https://img.freepik.com/premium-vector/body-patient-image-icon-flat-vector-clinic-examination_98396-69431.jpg" alt="User" className="w-full h-full" />
                 </div>
                 <div>
-                    <h1 className="text-3xl font-bold text-indigo-600">Hi, {user.user.name.toUpperCase()} 👋</h1>
+                    <div className="flex items-center gap-3">
+                        <h1 className="text-3xl font-bold text-indigo-600">Hi, {user.user.name.toUpperCase()} 👋</h1>
+                        <button
+                            onClick={() => navigate("/edit-profile")}
+                            className="p-2 rounded-full hover:bg-indigo-50 transition cursor-pointer"
+                            title="Edit Profile"
+                        >
+                            <Pencil className="w-5 h-5 text-indigo-600" />
+                        </button>
+                    </div>
                     <div className="mt-5 ml-5">
                         <p className="text-lg text-gray-700"><strong>Age :</strong> {user.user.age}</p>
                         <p className="text-lg text-gray-700"><strong>Gender :</strong> {user.user.gender}</p>

@@ -39,7 +39,7 @@ const initDB = () => {
     CREATE TABLE IF NOT EXISTS doctors (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       role TEXT DEFAULT 'Doctor',
-      verify TEXT DEFAULT 'Under Review' CHECK(verify IN ('Under Review', 'Verified')),
+      verify TEXT DEFAULT 'Verified' CHECK(verify IN ('Under Review', 'Verified')),
       name TEXT NOT NULL,
       email TEXT UNIQUE NOT NULL,
       password TEXT NOT NULL,
